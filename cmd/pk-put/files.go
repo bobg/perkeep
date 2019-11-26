@@ -34,6 +34,8 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/bobg/atime/v2"
+
 	"perkeep.org/internal/chanworker"
 	"perkeep.org/internal/hashutil"
 	"perkeep.org/pkg/blob"
@@ -348,7 +350,11 @@ func (up *Uploader) stat(path string) (os.FileInfo, error) {
 	return os.Stat(path)
 }
 
-func (up *Uploader) open(path string) (*os.File, error) {
+func (up *Uploader) open(path string) (*atime.File, error) {
+	return atime.Open(path)
+}
+
+func (up *Uploader) opendir(path string) (*os.File, error) {
 	return os.Open(path)
 }
 
@@ -574,7 +580,7 @@ func (up *Uploader) uploadNodeRegularFile(ctx context.Context, n *node) (*client
 	defer file.Close()
 	if !up.fileOpts.contentsOnly {
 		if up.fileOpts.exifTime {
-			modtime, err := schema.FileTime(file)
+			modtime, err := schema.FileTime(file.F)
 			if err != nil {
 				cmdmain.Logf("warning: getting time from EXIF failed for %v: %v", n.fullPath, err)
 			} else {
@@ -959,7 +965,7 @@ func (t *TreeUpload) statPath(fullPath string, fi os.FileInfo) (nod *node, err e
 	if !fi.IsDir() {
 		return n, nil
 	}
-	f, err := t.up.open(fullPath)
+	f, err := t.up.opendir(fullPath)
 	if err != nil {
 		return nil, err
 	}

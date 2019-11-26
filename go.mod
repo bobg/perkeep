@@ -7,6 +7,7 @@ require (
 	cloud.google.com/go v0.39.0
 	github.com/FiloSottile/b2 v0.0.0-20170207175032-b197f7a2c317
 	github.com/aws/aws-sdk-go v1.14.31
+	github.com/bobg/atime/v2 v2.2.1
 	github.com/bradfitz/latlong v0.0.0-20140711231157-b74550508561
 	github.com/cznic/fileutil v0.0.0-20180108211300-6a051e75936f // indirect
 	github.com/cznic/internal v0.0.0-20170905175358-4747030f7cf2 // indirect
