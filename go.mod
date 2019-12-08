@@ -11,6 +11,7 @@ require (
 	cloud.google.com/go/pubsub v1.1.0 // indirect
 	cloud.google.com/go/storage v1.0.0
 	github.com/FiloSottile/b2 v0.0.0-20170207175032-b197f7a2c317
+	github.com/NYTimes/gziphandler v1.1.1
 	github.com/aws/aws-sdk-go v1.25.43
 	github.com/bradfitz/latlong v0.0.0-20140711231157-b74550508561
 	github.com/cznic/fileutil v0.0.0-20180108211300-6a051e75936f // indirect
